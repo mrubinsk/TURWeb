@@ -68,7 +68,7 @@ class RubinskyWeb_News {
      * Get a list of news articles by tag.
      *
      */
-    public static function getNewsByTag($feed, $tag, $count = 5)
+    public static function getNewsByTag($feed, $tag, $count = 20)
     {
         global $registry;
 
