@@ -58,7 +58,10 @@ class RubinskyWeb_News {
         $html .= '<div class="storyBody">';
         $html .= '<h1>' . $story['story_title'] . '</h1>'. "\n";
         $html .= $story['story_body'] . '<div class="clearer"></div>' . "\n";
-        $html .= '<div class="articleLink"><a href="' .  htmlspecialchars($story['story_link']) . '">Permalink</a></div>';
+        $html .= '<div class="articleLink">';
+        $html .= ' <span style="float:right;" class="newNewsTags">Tags: ' . implode(', ', $story['story_tags']) . '</span>';
+        $html .= '  <a href="' .  htmlspecialchars($story['story_link']) . '">Permalink</a>';
+        $html .= '</div>';
         $html .= '</div></div>';
         return $html;
     }

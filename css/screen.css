@@ -42,7 +42,7 @@ code {
     border-left: 6px solid #938262;
     color: #554;
     display: block;
-    font: normal 1.1em "Lucida Sans Unicode",serif;
+    font: normal 1.4em "Lucida Sans Unicode",serif;
     margin-bottom: 12px;
     padding: 8px 10px;
     white-space: pre;
@@ -205,6 +205,9 @@ h1,h2,h3 {
     border: 2px solid #CDB792;
 }
 
+.article {
+    margin-bottom: 25px;
+}
 .storyBody {
     margin-left: 80px;
 }
