@@ -45,7 +45,7 @@ code {
     font: normal 1.1em "Lucida Sans Unicode",serif;
     margin-bottom: 12px;
     padding: 8px 10px;
-    /*white-space: pre;*/
+    white-space: pre;
 }
 blockquote {
     background: url(../img/quote.gif) no-repeat;
