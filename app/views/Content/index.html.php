@@ -84,3 +84,4 @@
      </div>
      <div class="clearer"></div>
    </div>
+ <?php echo $this->render('templates/common-footer.php');?>
