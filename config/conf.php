@@ -1,0 +1,24 @@
+<?php
+/**
+ * Site-wide configuration stuff
+ *
+ * $Id: conf.php.dist,v 1.1.1.1 2008/05/28 20:30:38 mrubinsk Exp $
+ */
+
+/* Define our HORDE_BASE */
+define('HORDE_BASE', '/horde');
+
+/* File system base of the website root */
+$fs_base = '/var/www/html/turweb';
+
+/* URL base of the site root. */
+$host_base = 'localhost/turweb';
+
+/* This site's name (Used as the banner text) */
+$site_name = 'theUpstairsRoom';
+
+$news_feed_id = 124;
+$max_stories = 4;
+
+$news_share_url = 'http://portal.theupstairsroom.com/horde/jonah/stories/share.php';
+$feed_base = 'http://portal.theupstairsroom.com/horde/jonah/delivery/rss.php';
