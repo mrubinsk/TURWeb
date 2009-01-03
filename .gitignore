@@ -3,3 +3,6 @@
 .project
 .settings
 .settings/*
+.cache
+config/lighttpd.conf
+config/conf.php
