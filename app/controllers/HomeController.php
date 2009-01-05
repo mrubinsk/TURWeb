@@ -38,7 +38,7 @@ class HomeController extends Horde_Controller_Base {
         // This is a hack to avoid calculating the number of articles - which
         // right now would mean downloading all available stories.
         $this->pageCount = ceil($registry->news->storyCount($news_feed_id)/$GLOBALS['max_stories']);
-        $this->page = $this->params->get('page', 0);
+        $this->page = $this->params->get('page', 1);
 
         /* RSS */
         $this->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $news_feed_id;

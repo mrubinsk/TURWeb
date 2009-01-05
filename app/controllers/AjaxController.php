@@ -14,9 +14,9 @@ class AjaxController extends Horde_Controller_Base {
         // Setup
         $perpage = $GLOBALS['max_stories'];
         $this->page = $this->params->get('page', 0);
-        $this->pageCount = ceil($GLOBALS['registry']->news->storyCount($GLOBALS['news_feed_id'])/$GLOBALS['max_stories']);
+        $this->pageCount = floor($GLOBALS['registry']->news->storyCount($GLOBALS['news_feed_id'])/$GLOBALS['max_stories']);
         $this->summary = RubinskyWeb_News::getNewsStories(
-            $GLOBALS['news_feed_id'], $perpage, ($this->page + 1) * $perpage);
+            $GLOBALS['news_feed_id'], $perpage, ($this->page) * $perpage);
         $this->summaryTitlesOnly = true;
         $this->render();
     }
