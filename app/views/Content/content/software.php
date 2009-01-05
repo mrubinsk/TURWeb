@@ -37,7 +37,7 @@
      <p>Simply unpack the aeros_theme.tgz file into the horde/themes directory. <br /></p>
      <h2>Screen Shots</h2>
       <div style="text-align:center;">
-      <img src="<?php echo $this->host_base?>/images/aeros_theme/aeros_1.png" /><br /><img src="<?php echo $this->host_base?>/images/aeros_theme/aeros_2.png" />
+      <img src="<?php echo $this->host_base?>/img/aeros_theme/aeros_1.png" /><br /><img src="<?php echo $this->host_base?>/img/aeros_theme/aeros_2.png" />
       </div>
  </div>
 
