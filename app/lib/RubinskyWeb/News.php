@@ -7,30 +7,6 @@
 class RubinskyWeb_News {
 
     /**
-     * @param boolean $full  Show the full summary or just titles?
-     */
-    public static function renderSummaryTemplate($stories, $full = true)
-    {
-        global $fs_base, $base_url;
-        require_once 'Horde/Template.php';
-        if (!is_a($stories, 'PEAR_Error')) {
-            $html = '';
-            if (is_array($stories)) {
-                $template = new Horde_Template();
-                $template->set('stories', $stories, true);
-                $template->set('full', $full, true);
-                $html = $template->fetch($fs_base . '/templates/news.tpl');
-            }
-
-            return array('html' => $html,
-                'date' => (isset($stories[0])) ?  strftime('%x', $stories[0]['story_published']) : '');
-        } else {
-            print_r($stories);
-        }
-    }
-
-
-    /**
      * Returns a block of html containing only story/news html for the
      * most recently posted article..no parent <div> tags
      * Currently, this is only used to grab the news content for the front page,

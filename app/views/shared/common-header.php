@@ -11,6 +11,15 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $this->feedurl?>" />
 <?php endif ?>
 <title><?php echo $this->page_title?></title>
+<script type="text/javascript" src="http://portal.theupstairsroom.com/horde/js/prototype.js"></script>
+<script type="text/javascript">
+function updatePreviously(page)
+{
+    new Ajax.Updater('previously',
+                     '<?php echo $this->urlWriter->urlFor('gotopage/')?>' + page);
+    return false;
+}
+</script>
 </head>
 <body>
  <div class="container">

@@ -4,17 +4,13 @@ class HomeController extends Horde_Controller_Base {
 
     public function index()
     {
-        global $registry, $news_feed_id, $site_name, $jonah_channel;
+        global $registry, $news_feed_id, $jonah_channel;
         $this->_setup();
 
-        /* Basic page info */
-        $this->page_title = $site_name;
-        $this->site_name = $site_name;
-
         if ($id = $this->params->get('id')) {
-            $this->news_content = RubinskyWeb_News::formatBlogEntry($registry->call('news/story', array($news_feed_id, $id, true)));
+            $this->content = RubinskyWeb_News::formatBlogEntry($registry->call('news/story', array($news_feed_id, $id, true)));
         } else {
-            $this->news_content = RubinskyWeb_News::getLatestNews($news_feed_id, $GLOBALS['max_stories']);
+            $this->content = RubinskyWeb_News::getLatestNews($news_feed_id, $GLOBALS['max_stories']);
         }
 
        /* Build the tag cloud */
@@ -32,8 +28,17 @@ class HomeController extends Horde_Controller_Base {
             $this->cloud_html = '';
         }
         /* List of previous entries */
-        $previously = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
-        $this->previously = RubinskyWeb_News::renderSummaryTemplate($previously, false);
+        $this->summary = RubinskyWeb_News::getNewsStories(
+            $news_feed_id, $GLOBALS['max_stories'], $GLOBALS['max_stories']);
+
+        $this->summaryTitlesOnly = true;
+
+        // Previously paging. Home page is page 0
+        // older articles increase page number
+        // This is a hack to avoid calculating the number of articles - which
+        // right now would mean downloading all available stories.
+        $this->pageCount = ceil($registry->news->storyCount($news_feed_id)/$GLOBALS['max_stories']);
+        $this->page = $this->params->get('page', 0);
 
         /* RSS */
         $this->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $news_feed_id;
@@ -51,15 +56,14 @@ class HomeController extends Horde_Controller_Base {
 
         $tag = $this->params->get('tag');
         $recent = RubinskyWeb_News::getNewsStories($news_feed_id, 11, 0);
-        $id = $this->params->get('id');
         $stories = RubinskyWeb_News::getNewsByTag($news_feed_id, $tag);
         if ($stories && count($stories)) {
-            $this->news_content = RubinskyWeb_News::getLatestNews(0, 5, $stories);
+            $this->content = RubinskyWeb_News::getLatestNews(0, 5, $stories);
         }
 
         /* List of previous entries */
-        $previously = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
-        $this->previously = RubinskyWeb_News::renderSummaryTemplate($previously, false);
+        $this->summary = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
+        $this->summaryTitlesOnly = true;
 
         $cloud = new Horde_UI_TagCloud();
         $tags = $registry->call('news/listTagInfo', array(array(), array($news_feed_id)));
@@ -93,6 +97,10 @@ class HomeController extends Horde_Controller_Base {
         // ...and for the rest...
         $this->urlWriter = $this->getUrlWriter();
         $this->metatags = ''; // TODO
+
+        /* Basic page info */
+        $this->page_title = $this->site_name = $GLOBALS['site_name'];
+
     }
 
 }

@@ -1,12 +1,13 @@
 <?php
 /**
- * Controller for a general purpose content page
+ * Controller for general purpose pages - so we don't have to have a separate
+ * controller for each simple page, like 'about' pages etc...
  *
- * $params['content'] should be the content template
+ * $params['content'] should be the name of the content template to use that is
+ * located in app/views/Content/content/*.php
  *
  */
 class ContentController extends Horde_Controller_Base {
-    protected $vimeo;
 
     function index()
     {
@@ -16,11 +17,11 @@ class ContentController extends Horde_Controller_Base {
         $this->page_title = $this->site_name = $GLOBALS['site_name'];
 
         ob_start();
-        include dirname(__FILE__) . '/../../templates/content/' . basename($this->params->content) . '.php';
+        include(dirname(__FILE__) . '/../views/Content/content/' . basename($this->params->content) . '.php');
         $this->content = ob_get_clean();
 
         /* I guess for this site, all pages should have the same right hand bar */
-       /* Build the tag cloud */
+        /* Build the tag cloud */
         $cloud = new Horde_UI_TagCloud();
         $tags = $registry->call('news/listTagInfo', array(array(), array($news_feed_id)));
         if (!is_a($tags, 'PEAR_Error')) {
@@ -35,8 +36,8 @@ class ContentController extends Horde_Controller_Base {
             $this->cloud_html = '';
         }
         /* List of previous entries */
-        $previously = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
-        $this->previously = RubinskyWeb_News::renderSummaryTemplate($previously, false);
+        $this->summary = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
+        $this->summaryTitlesOnly = true;
 
         /* RSS */
         $this->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $news_feed_id;

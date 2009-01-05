@@ -261,4 +261,18 @@ h1.sectionHeader {
 }
 .softwareItemBlock h2 {
     font-size: 1.2em;
-    }
+}
+
+#olderLink {
+    float: left;
+    font-size: 1.3em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#newerLink {
+    float: right;
+    font-size: 1.3em;
+    text-decoration: none;
+    font-weight: bold;
+}
