@@ -1,4 +1,4 @@
-<?php if ($this->page < $this->pageCount): ?>
+<?php if ($this->page <= $this->pageCount): ?>
    <a href="#" id="olderLink" onClick="return updatePreviously(<?php echo (int)$this->page + 1?>);"><< Older</a>
 <?php endif;?>
 <?php if ($this->page > 0): ?>
