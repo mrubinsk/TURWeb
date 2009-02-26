@@ -37,11 +37,15 @@ class ContentController extends Horde_Controller_Base {
         /* List of previous entries */
         $this->summary = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
         $this->summaryTitlesOnly = true;
+        // Previously paging. Home page is page 0
+        // older articles increase page number
+        // This is a hack to avoid calculating the number of articles - which
+        // right now would mean downloading all available stories.
+        $this->pageCount = ceil($registry->news->storyCount($news_feed_id)/$GLOBALS['max_stories']);
+        $this->page = $this->params->get('page', 1);
 
         /* RSS */
         $this->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $news_feed_id;
-
-
 
         /* Takes care of all header and footers as well */
         echo $this->render();
@@ -49,6 +53,11 @@ class ContentController extends Horde_Controller_Base {
 
     protected function _initializeApplication()
     {
+        $this->_view->addHelper('Tag');
+        $this->_view->addHelper('Text');
+        $this->_view->addHelper('Capture');
+        $this->setLayout('main');
+
          // This one is used alot...
         $this->homeurl = $this->urlFor('home');
 

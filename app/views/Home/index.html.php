@@ -1,1 +1,1 @@
-<?php echo $this->render('main.html.php');?>
+<?php echo $this->content;?>

@@ -1,3 +1,3 @@
 <?php
 header('Content-Type: text/html');
-echo $this->render('news.php');
+echo $this->renderPartial('news');

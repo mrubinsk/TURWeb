@@ -22,10 +22,9 @@ class HomeController extends Horde_Controller_Base {
                     $this->urlFor('tag', array('tag' => $tag['tag_name'])),
                     $tag['total'] * 5);
             }
-            $this->cloud_html = $cloud->buildHTML();
-        } else {
-            $this->cloud_html = '';
+            $this->contentForCloud = $cloud->buildHTML();
         }
+
         /* List of previous entries */
         $this->summary = RubinskyWeb_News::getNewsStories(
             $news_feed_id, $GLOBALS['max_stories'], $GLOBALS['max_stories']);
@@ -63,6 +62,12 @@ class HomeController extends Horde_Controller_Base {
         $this->summary = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
         $this->summaryTitlesOnly = true;
 
+        // Previously paging. Home page is page 0
+        // older articles increase page number
+        // This is a hack to avoid calculating the number of articles - which
+        // right now would mean downloading all available stories.
+        $this->pageCount = ceil($registry->news->storyCount($news_feed_id)/$GLOBALS['max_stories']);
+        $this->page = $this->params->get('page', 1);
         $cloud = new Horde_UI_TagCloud();
         $tags = $registry->call('news/listTagInfo', array(array(), array($news_feed_id)));
         if (!is_a($tags, 'PEAR_Error')) {
@@ -72,9 +77,7 @@ class HomeController extends Horde_Controller_Base {
                     $this->urlFor('tag', array('tag' => $tag['tag_name'])),
                     $tag['total'] * 5);
             }
-            $this->cloud_html = $cloud->buildHTML();
-        } else {
-            $this->cloud_html = '';
+            $this->contentForCloud = $cloud->buildHTML();
         }
         $this->renderAction('index');
     }
@@ -88,6 +91,8 @@ class HomeController extends Horde_Controller_Base {
         // Load Helpers
         $this->_view->addHelper('Tag');
         $this->_view->addHelper('Text');
+        $this->_view->addHelper('Capture');
+        $this->setLayout('main');
 
          // This one is used alot...
         $this->homeurl = $this->urlFor('home');
