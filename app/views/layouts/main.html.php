@@ -1,9 +1,8 @@
  <?php echo $this->render('common-header.php');?>
     <div class="main">
      <!--  Main content area -->
-     <div class="content">
-      <?php echo $this->content; ?>
-     </div><!--  End main content area -->
+     <?php echo $this->contentTag('div', $this->content, array('class' => 'content'));?>
+     <!--  End main content area -->
 
      <!-- Right Hand Bar -->
      <div class="sidenav">

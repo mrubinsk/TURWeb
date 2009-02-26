@@ -20,5 +20,11 @@ class AjaxController extends Horde_Controller_Base {
         $this->summaryTitlesOnly = true;
         $this->render();
     }
+
+    protected function _initializeApplication()
+    {
+        $this->_view->addHelper('Tag');
+        $this->_view->addHelper('Text');
+    }
 }
 ?>

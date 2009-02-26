@@ -1,16 +1,25 @@
-<?php if ($this->page + 2 <= $this->pageCount): ?>
-   <a href="#" id="olderLink" onClick="return updatePreviously(<?php echo (int)$this->page + 1?>);"><< Older</a>
-<?php endif;?>
-<?php if ($this->page > 0): ?>
-   <a href="#" id="newerLink" onClick="return updatePreviously(<?php echo (int)$this->page - 1?>);">Newer >></a>
-<?php endif;?>
-<div class="clearer"></div>
+<?php
+if ($this->page + 2 <= $this->pageCount) {
+    echo $this->contentTag('a', $this->escape('<< Older'),
+        array('href' => '#',
+              'id' => 'olderLink',
+              'onClick' => 'return updatePreviously(' . ((int)$this->page + 1) . ');'));
+}
+if ($this->page > 0) {
+    echo $this->contentTag('a', $this->escape('Newer >>'),
+    array('href' => '#',
+          'id' => 'newerLink',
+          'onClick' => 'return updatePreviously(' . ((int)$this->page - 1) . ');'));
+}
+
+echo $this->contentTag('div', '&nbsp;', array('class' => 'clearer'));
+?>
 <ul>
-<?php foreach ($this->summary as $story):?>
-  <li><a class="rfNewsHeader" href="<?php echo $story['story_link']?>"><?php echo $story['story_title']?></a>
-  <?php if (!$this->summaryTitlesOnly):?>
-    <div class="rfNewsBody"><?php echo $story['story_desc']?></div>
-  <?php endif;?>
-  </li>
-<?php endforeach; ?>
+<?php
+    foreach ($this->summary as $story) {
+        echo $this->contentTag('li',
+            $this->contentTag('a', $story['story_title'], array('href' => $story['story_link'], 'class' => 'rfNewsHeader'))
+             . ((!$this->summaryTitlesOnly) ? $this->contentTag('div', $story['story_desc'], array('class' => 'rfNewsHeader')) : ''));
+    }
+?>
 </ul>

@@ -85,6 +85,10 @@ class HomeController extends Horde_Controller_Base {
      */
     protected function _initializeApplication()
     {
+        // Load Helpers
+        $this->_view->addHelper('Tag');
+        $this->_view->addHelper('Text');
+
          // This one is used alot...
         $this->homeurl = $this->urlFor('home');
 
