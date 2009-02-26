@@ -5,7 +5,6 @@ class HomeController extends Horde_Controller_Base {
     public function index()
     {
         global $registry, $news_feed_id, $jonah_channel;
-        $this->_setup();
 
         if ($id = $this->params->get('id')) {
             $this->content = RubinskyWeb_News::formatBlogEntry($registry->call('news/story', array($news_feed_id, $id, true)));
@@ -51,7 +50,6 @@ class HomeController extends Horde_Controller_Base {
     {
         global $registry, $news_feed_id;
 
-        $this->_setup();
         $this->page_title = sprintf("Stories tagged with %s", $this->params->get('tag'));
 
         $tag = $this->params->get('tag');
@@ -85,7 +83,7 @@ class HomeController extends Horde_Controller_Base {
      * Enter description here...
      *
      */
-    private function _setup()
+    protected function _initializeApplication()
     {
          // This one is used alot...
         $this->homeurl = $this->urlFor('home');

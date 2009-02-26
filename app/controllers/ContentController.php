@@ -12,7 +12,6 @@ class ContentController extends Horde_Controller_Base {
     function index()
     {
         global $registry, $news_feed_id;
-        $this->_setup();
 
         $this->page_title = $this->site_name = $GLOBALS['site_name'];
 
@@ -48,7 +47,7 @@ class ContentController extends Horde_Controller_Base {
         echo $this->render();
     }
 
-    private function _setup()
+    protected function _initializeApplication()
     {
          // This one is used alot...
         $this->homeurl = $this->urlFor('home');
