@@ -276,3 +276,13 @@ h1.sectionHeader {
     text-decoration: none;
     font-weight: bold;
 }
+
+#twitter_update_list a {
+    font-style: italic;
+    background: none;
+    font-weight: normal;
+}
+
+#twitter_update_list li {
+    padding-top: 4px;
+}

@@ -11,6 +11,7 @@
      <!-- Right Hand Bar -->
      <div class="sidenav">
       <?php echo $this->renderPartial('poweredby'); ?>
+      <?php echo $this->renderPartial('twitter');?>
       <?php echo $this->renderPartial('downloads'); ?>
       <?php echo $this->renderPartial('cloud'); ?>
       <?php echo $this->renderPartial('previously');?>
