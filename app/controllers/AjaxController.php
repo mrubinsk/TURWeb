@@ -12,11 +12,11 @@ class AjaxController extends Horde_Controller_Base
     function page()
     {
         // Setup
-        $perpage = $GLOBALS['injector']->getInstance('site_config')->max_stories;
+        $perpage = $GLOBALS['max_stories'];
         $this->page = $this->params->get('page', 0);
         $this->pageCount = floor($GLOBALS['registry']->news->storyCount($GLOBALS['injector']->getInstance('site_config')->news_feed)/$GLOBALS['injector']->getInstance('site_config')->max_stories);
         $this->summary = RubinskyWeb_News::getNewsStories(
-            $GLOBALS['injector']->getInstance('site_config')->news_feed,
+            $GLOBALS['news_feed'],
             $perpage,
             ($this->page) * $perpage);
         $this->summaryTitlesOnly = true;
