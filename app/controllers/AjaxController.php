@@ -2,21 +2,23 @@
 /**
  * Controller for handling any Ajax requests
  */
-class AjaxController extends Horde_Controller_Base {
-
-
+class AjaxController extends Horde_Controller_Base
+{
     /**
      * Provides ajax paging of the Previously block
+     *
      * $this->params->page should have the page number to display
      */
     function page()
     {
         // Setup
-        $perpage = $GLOBALS['max_stories'];
+        $perpage = $GLOBALS['injector']->getInstance('site_config')->max_stories;
         $this->page = $this->params->get('page', 0);
-        $this->pageCount = floor($GLOBALS['registry']->news->storyCount($GLOBALS['news_feed_id'])/$GLOBALS['max_stories']);
+        $this->pageCount = floor($GLOBALS['registry']->news->storyCount($GLOBALS['injector']->getInstance('site_config')->news_feed)/$GLOBALS['injector']->getInstance('site_config')->max_stories);
         $this->summary = RubinskyWeb_News::getNewsStories(
-            $GLOBALS['news_feed_id'], $perpage, ($this->page) * $perpage);
+            $GLOBALS['injector']->getInstance('site_config')->news_feed,
+            $perpage,
+            ($this->page) * $perpage);
         $this->summaryTitlesOnly = true;
         $this->render();
     }
@@ -27,4 +29,3 @@ class AjaxController extends Horde_Controller_Base {
         $this->_view->addHelper('Text');
     }
 }
-?>

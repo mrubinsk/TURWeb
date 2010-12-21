@@ -1,11 +1,9 @@
 <?php
 /**
  * Helper class for working with Horde-based news content via the api.
- * $Id: $
  */
-
-class RubinskyWeb_News {
-
+class RubinskyWeb_News
+{
     /**
      * Returns a block of html containing only story/news html for the
      * most recently posted article..no parent <div> tags
@@ -14,7 +12,6 @@ class RubinskyWeb_News {
      */
     public static function getLatestNews($feed, $count = 5, $stories = array())
     {
-
         if (count($stories) === 0) {
             $stories = self::getNewsStories($feed, $count, 0);
         }
@@ -49,9 +46,7 @@ class RubinskyWeb_News {
      */
     public static function getNewsByTag($feed, $tag, $count = 20)
     {
-        global $registry;
-
-        return $registry->news->searchTags(array($tag), $count, 0, array($feed), 0, true);
+        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->searchTags(array($tag), $count, 0, array($feed), 0, true);
     }
 
     /**
@@ -59,9 +54,7 @@ class RubinskyWeb_News {
      */
     public static function getNewsStories($feed, $max = 10, $start = 0)
     {
-        global $registry;
-        $stories = $registry->call('news/stories', array($feed, $max, $start));
-        return $stories;
+        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->stories($feed, $max, $start);
     }
 
     /**
@@ -74,7 +67,6 @@ class RubinskyWeb_News {
      */
     public static function getConsolidatedStories($feeds, $max = null)
     {
-        global $registry;
         $stories = array();
         if (!is_array($feeds)) {
             $feeds = array($feeds);
@@ -90,7 +82,6 @@ class RubinskyWeb_News {
         return $stories;
     }
 
-
     /**
      * Function to numerically sort an associative array by a specific index
      * Designed to ease sorting stories by a timestamp when combining seperate
@@ -99,20 +90,21 @@ class RubinskyWeb_News {
      * @param array $sortarray  The array to sort.
      * @param string $index  The index that contains the numerical value to sort by.
      */
-    function asortbyindex ($sortarray, $index) {
-           $lastindex = count ($sortarray) - 1;
-           for ($subindex = 0; $subindex < $lastindex; $subindex++) {
-                   $lastiteration = $lastindex - $subindex;
-                   for ($iteration = 0; $iteration < $lastiteration; $iteration++) {
-                           $nextchar = 0;
-                           if ($sortarray[$iteration][$index] < $sortarray[$iteration + 1][$index]) {
-                                   $temp = $sortarray[$iteration];
-                                   $sortarray[$iteration] = $sortarray[$iteration + 1];
-                                   $sortarray[$iteration + 1] = $temp;
-                           }
-                   }
-           }
-           return ($sortarray);
+    public static function asortbyindex($sortarray, $index)
+    {
+       $lastindex = count ($sortarray) - 1;
+       for ($subindex = 0; $subindex < $lastindex; $subindex++) {
+               $lastiteration = $lastindex - $subindex;
+               for ($iteration = 0; $iteration < $lastiteration; $iteration++) {
+                       $nextchar = 0;
+                       if ($sortarray[$iteration][$index] < $sortarray[$iteration + 1][$index]) {
+                               $temp = $sortarray[$iteration];
+                               $sortarray[$iteration] = $sortarray[$iteration + 1];
+                               $sortarray[$iteration + 1] = $temp;
+                       }
+               }
+       }
+       return ($sortarray);
     }
 
 }

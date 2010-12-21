@@ -7,23 +7,21 @@
  * located in app/views/Content/content/*.php
  *
  */
-class ContentController extends Horde_Controller_Base {
-
-    function index()
+class ContentController extends Horde_Controller_Base
+{
+    public function index()
     {
-        global $registry, $news_feed_id;
+        $this->page_title = $this->site_name = $GLOBALS['injector']->getInstance('site_config')->site_name;
 
-        $this->page_title = $this->site_name = $GLOBALS['site_name'];
-
-        ob_start();
+        Horde::startBuffer();
         include(dirname(__FILE__) . '/../views/Content/content/' . basename($this->params->content) . '.php');
-        $this->content = ob_get_clean();
+        $this->content = Horde::endBuffer();
 
         /* I guess for this site, all pages should have the same right hand bar */
         /* Build the tag cloud */
         $cloud = new Horde_UI_TagCloud();
-        $tags = $registry->call('news/listTagInfo', array(array(), array($news_feed_id)));
-        if (!is_a($tags, 'PEAR_Error')) {
+        try {
+            $tags = $GLOBALS['injector']->getInstance('Horde_Registry')->news->listTagInfo(array(), array($GLOBALS['injector']->getInstance('site_config')->news_feed));
             foreach ($tags as $tag) {
                 $cloud->addElement(
                     $tag['tag_name'],
@@ -31,21 +29,27 @@ class ContentController extends Horde_Controller_Base {
                     $tag['total'] * 5);
             }
             $this->cloud_html = $cloud->buildHTML();
-        } else {
+        } catch (Exception $e) {
             $this->cloud_html = '';
         }
+
         /* List of previous entries */
-        $this->summary = RubinskyWeb_News::getNewsStories($news_feed_id, 5, $GLOBALS['max_stories']);
+        $this->summary = RubinskyWeb_News::getNewsStories(
+                $GLOBALS['injector']->getInstance('site_config')->news_feed,
+                5,
+                $GLOBALS['injector']->getInstance('site_config')->max_stories);
+        
         $this->summaryTitlesOnly = true;
+
         // Previously paging. Home page is page 0
         // older articles increase page number
         // This is a hack to avoid calculating the number of articles - which
         // right now would mean downloading all available stories.
-        $this->pageCount = ceil($registry->news->storyCount($news_feed_id)/$GLOBALS['max_stories']);
+        $this->pageCount = ceil($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['injector']->getInstance('site_config')->news_feed)/$GLOBALS['injector']->getInstance('site_config')->max_stories);
         $this->page = $this->params->get('page', 1);
 
         /* RSS */
-        $this->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $news_feed_id;
+        $this->feedurl = $GLOBALS['injector']->getInstance('site_config')->feed_base . '?channel_id=' . $GLOBALS['injector']->getInstance('site_config')->news_feed;
 
         /* Takes care of all header and footers as well */
         echo $this->render();
@@ -63,7 +67,7 @@ class ContentController extends Horde_Controller_Base {
 
         // Slight hack, but this makes it easier for me to move things from
         // dev to production etc...
-        $this->host_base = $GLOBALS['host_base'];
+        $this->host_base = $GLOBALS['injector']->getInstance('site_config')->host_base;
 
         // ...and for the rest...
         $this->urlWriter = $this->getUrlWriter();
