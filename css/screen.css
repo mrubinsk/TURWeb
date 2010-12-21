@@ -36,24 +36,14 @@ h1 {
     font-size: 1.4em;
     margin-bottom: 4px;
 }
-code {
-    background: #FFE;
-    border: 1px solid #EED;
-    border-left: 6px solid #938262;
-    color: #554;
-    display: block;
-    font: normal 1.4em "Lucida Sans Unicode",serif;
-    margin-bottom: 12px;
-    padding: 8px 10px;
-    white-space: pre;
-}
-blockquote {
+
+/*blockquote {
     background: url(../img/quote.gif) no-repeat;
     color: #666;
     display: block;
     font: normal 1.3em "Lucida Sans Unicode",serif;
     padding-left: 28px;
-}
+}*/
 h1,h2,h3 {
     color: #654;
     padding-top: 6px;
@@ -65,7 +55,7 @@ h1,h2,h3 {
 }
 
 /* structure */
-.container {
+.maincontainer {
     background: url(../img/bgcontainer.gif) repeat-y;
     margin: 0 auto;
     width: 780px;

@@ -19,4 +19,4 @@ $GLOBALS['injector']->addBinder('RubinskyWeb_View', new RubinskyWeb_Binder_View(
 $registry = $GLOBALS['injector']->getInstance('Horde_Registry');
 
 /* Add our config to the injector */
-$GLOBALS['injector']->setInstance('site_config', $config);
+//`$GLOBALS['injector']->setInstance('site_config', $config);

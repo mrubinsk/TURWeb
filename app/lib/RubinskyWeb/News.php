@@ -15,6 +15,7 @@ class RubinskyWeb_News
         if (count($stories) === 0) {
             $stories = self::getNewsStories($feed, $count, 0);
         }
+//var_dump($stories);
         $html = '';
         if (is_array($stories)) {
             foreach ($stories as $story) {
@@ -26,14 +27,14 @@ class RubinskyWeb_News
 
     public static function formatBlogEntry($story)
     {
-        $html = '<div class="article">';
-        $html .= '<span class="storyDate round">' . date('j M Y', $story['story_published']) . '</span>';
+	$html = '<div class="article">';
+        $html .= '<span class="storyDate round">' . date('j M Y', $story['published']) . '</span>';
         $html .= '<div class="storyBody">';
-        $html .= '<h1>' . $story['story_title'] . '</h1>'. "\n";
-        $html .= $story['story_body'] . '<div class="clearer"></div>' . "\n";
+        $html .= '<h1>' . $story['title'] . '</h1>'. "\n";
+        $html .= $story['body_html'] . '<div class="clearer"></div>' . "\n";
         $html .= '<div class="articleLink">';
-        $html .= ' <span style="float:right;" class="newNewsTags">Tags: ' . implode(', ', $story['story_tags']) . '</span>';
-        $html .= '  <a href="' .  htmlspecialchars($story['story_link']) . '">Permalink</a>';
+        $html .= ' <span style="float:right;" class="newNewsTags">Tags: ' . implode(', ', $story['tags']) . '</span>';
+        $html .= '  <a href="' .  htmlspecialchars($story['permalink']) . '">Permalink</a>';
         $html .= '</div>';
         $html .= '</div></div>';
         return $html;
@@ -54,7 +55,7 @@ class RubinskyWeb_News
      */
     public static function getNewsStories($feed, $max = 10, $start = 0)
     {
-        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->stories($feed, $max, $start);
+        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->stories($feed, array('max_stories' => $max, 'start_at' => $start));
     }
 
     /**
@@ -78,7 +79,7 @@ class RubinskyWeb_News
                 $stories = array_merge($result, $stories);
             }
         }
-        $stories = self::asortbyindex($stories, 'story_published');
+        $stories = self::asortbyindex($stories, 'published');
         return $stories;
     }
 

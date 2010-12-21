@@ -7,22 +7,44 @@
 <meta name="keywords" content="keywords"/>
 <meta name="author" content="author"/>
 <link rel="stylesheet" type="text/css" href="http://<?php echo $this->host_base?>/css/screen.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="http://h4.theupstairsroom.com/horde/js/syntaxhighlighter/styles/shThemeEclipse.css"/>
+<link rel="stylesheet" type="text/css" href="http://h4.theupstairsroom.com/horde/js/syntaxhighlighter/styles/shCoreEclipse.css"/>
 <?php if (!empty($this->feedurl)):?>
     <link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $this->feedurl?>" />
 <?php endif ?>
 <title><?php echo $this->page_title?></title>
-<script type="text/javascript" src="http://portal.theupstairsroom.com/horde/js/prototype.js"></script>
+<script type="text/javascript" src="http://h4.theupstairsroom.com/horde/js/prototype.js"></script>
+<script type="text/javascript" src="http://h4.theupstairsroom.com/horde/js/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="http://h4.theupstairsroom.com/horde/js/syntaxhighlighter/scripts/shAutoloader.js"></script>
 <script type="text/javascript">
-function updatePreviously(page)
-{
-    new Ajax.Updater('previously',
+    document.observe('dom:loaded', function() {
+        var path = 'http://h4.theupstairsroom.com/horde/js/syntaxhighlighter/scripts/';
+        SyntaxHighlighter.autoloader(
+          'applescript ' + path + 'shBrushAppleScript.js',
+          'bash shell ' + path + 'shBrushBash.js',
+          'css ' + path + 'shBrushCss.js',
+          'diff patch pas ' + path + 'shBrushDiff.js',
+          'js jscript javascript ' + path + 'shBrushJScript.js',
+          'perl pl '+ path + 'shBrushPerl.js',
+          'php ' + path + 'shBrushPhp.js',
+          'text plain ' + path + 'shBrushPlain.js',
+          'sql ' + path + 'shBrushSql.js',
+          'xml xhtml xslt html ' + path + 'shBrushXml.js'
+        );
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+    });
+
+    function updatePreviously(page)
+    {
+        new Ajax.Updater('previously',
                      '<?php echo 'http://' . $this->host_base . '/gotopage/'?>' + page);
-    return false;
-}
+        return false;
+    }
 </script>
 </head>
 <body>
- <div class="container">
+ <div class="maincontainer">
   <!-- Page Banner -->
   <div class="header">
   <!-- Fix me - this is sloppy HTML -->

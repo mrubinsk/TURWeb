@@ -20,7 +20,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     {
         parent::_setup();
         $view = $this->getView();
-        $view->addTemplatePath($GLOBALS['fs_base'] . '/app/views/home');
+        $view->addTemplatePath($GLOBALS['fs_base'] . '/app/views/Home');
     }
 
     /**
@@ -42,12 +42,12 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         }
 
        /* Build the tag cloud */
-        $cloud = new Horde_Core_UI_TagCloud();
+        $cloud = new Horde_Core_Ui_TagCloud();
         $tags = $GLOBALS['injector']->getInstance('Horde_Registry')->news->listTagInfo(array(), array($GLOBALS['news_feed']));
         foreach ($tags as $tag) {
             $cloud->addElement(
                 $tag['tag_name'],
-                $this->urlFor('tag', array('tag' => $tag['tag_name'])),
+                $this->urlWriter->urlFor('tag', array('tag' => $tag['tag_name'])),
                 $tag['total'] * 5);
         }
         $view->contentForCloud = $cloud->buildHTML();
@@ -113,7 +113,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         foreach ($tags as $tag) {
             $cloud->addElement(
                 $tag['tag_name'],
-                $this->urlFor('tag', array('tag' => $tag['tag_name'])),
+                $this->urlWriter->urlFor('tag', array('tag' => $tag['tag_name'])),
                 $tag['total'] * 5);
         }
         $this->contentForCloud = $cloud->buildHTML();
@@ -133,7 +133,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         $this->setLayout('main');
 
          // This one is used alot...
-        $this->homeurl = $this->urlFor('home');
+        $this->homeurl = $this->urlWriter->urlFor('home');
 
         // Slight hack, but this makes it easier for me to move things from
         // dev to production etc...
