@@ -37,6 +37,8 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
      */
     protected function _page(Horde_Controller_Response $response)
     {
+        $this->_setup();
+
         // Setup
         $perpage = $GLOBALS['max_stories'];
 
@@ -44,12 +46,11 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
         
         $view->page = $this->_matchDict->get('page', 0);
         $view->pageCount = floor($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
-        $this->summary = RubinskyWeb_News::getNewsStories(
+        $view->summary = RubinskyWeb_News::getNewsStories(
             $GLOBALS['news_feed'],
             $perpage,
             ($view->page) * $perpage);
         $view->summaryTitlesOnly = true;
-
         $response->setBody($view->render('page'));
     }
 
