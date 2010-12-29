@@ -10,6 +10,16 @@
  */
 class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
 {
+    /**
+     *
+     */
+    protected function _setup()
+    {
+        parent::_setup();
+        $view = $this->getView();
+        $view->addTemplatePath(array($GLOBALS['fs_base'] . '/app/views/Home', $GLOBALS['fs_base'] . '/app/views/shared'));
+    }
+
     public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response)
     {
         $this->_mapper = $GLOBALS['injector']->getInstance('Horde_Routes_Mapper');
@@ -40,7 +50,7 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
             ($view->page) * $perpage);
         $view->summaryTitlesOnly = true;
 
-        $response->setBody($this->render('page'));
+        $response->setBody($view->render('page'));
     }
 
     protected function _initializeApplication()

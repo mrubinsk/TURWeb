@@ -22,7 +22,6 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     }
 
     /**
-     * Enter description here...
      *
      */
     protected function _setup()
