@@ -66,7 +66,9 @@
       <?php echo $this->renderPartial('twitter');?>
       <?php echo $this->renderPartial('downloads'); ?>
       <?php echo $this->renderPartial('cloud'); ?>
-      <?php echo $this->renderPartial('previously');?>
+      <?php echo $this->renderPartial('previously', array('locals' => array('page' => $this->page,
+                                                          'pageCount' => $this->pageCount,
+                                                          'summary' => $this->summary)));?>
       <?php echo $this->renderPartial('ads'); ?>
      </div>
      <div class="clearer"></div>

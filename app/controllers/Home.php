@@ -20,7 +20,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     {
         parent::_setup();
         $view = $this->getView();
-        $view->addTemplatePath($GLOBALS['fs_base'] . '/app/views/Home');
+        $view->addTemplatePath(array($GLOBALS['fs_base'] . '/app/views/Home', $GLOBALS['fs_base'] . '/app/views/shared'));
     }
 
     /**
@@ -59,14 +59,14 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
             $GLOBALS['max_stories']);
 
         $view->summaryTitlesOnly = true;
-
+        
         // Previously paging. Home page is page 0
         // older articles increase page number
         // This is a hack to avoid calculating the number of articles - which
         // right now would mean downloading all available stories.
         $view->pageCount = ceil($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
         $view->page = $this->_matchDict->get('page', 1);
-
+        
         /* RSS */
         $view->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $GLOBALS['news_feed'];
         $layout = $this->getInjector()->getInstance('Horde_Core_Ui_Layout');

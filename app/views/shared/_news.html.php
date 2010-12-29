@@ -18,8 +18,8 @@ echo $this->contentTag('div', '&nbsp;', array('class' => 'clearer'));
 <?php
     foreach ($this->summary as $story) {
         echo $this->contentTag('li',
-            $this->contentTag('a', $story['story_title'], array('href' => $story['story_link'], 'class' => 'rfNewsHeader'))
-             . ((!$this->summaryTitlesOnly) ? $this->contentTag('div', $story['story_desc'], array('class' => 'rfNewsHeader')) : ''));
+            $this->contentTag('a', $story['title'], array('href' => $story['permalink'], 'class' => 'rfNewsHeader'))
+             . ((!$this->summaryTitlesOnly) ? $this->contentTag('div', $story['description'], array('class' => 'rfNewsHeader')) : ''));
     }
 ?>
 </ul>

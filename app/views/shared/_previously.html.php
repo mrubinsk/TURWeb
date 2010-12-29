@@ -1,6 +1,9 @@
 <h1>Previously</h1>
 <div id="previously">
-<?php echo $this->renderPartial('news')?>
+<?php echo $this->renderPartial('news', array('locals' => array('page' => $this->page, 
+                                                          'pageCount' => $this->pageCount,
+                                                          'summary' => $this->summary)));
+?>
 </div>
 <h1>Links</h1>
 <ul>
