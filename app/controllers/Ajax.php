@@ -29,14 +29,18 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
     {
         // Setup
         $perpage = $GLOBALS['max_stories'];
-        $this->page = $this->_matchDict->get('page', 0);
-        $this->pageCount = floor($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
+
+        $view = $this->getView();
+        
+        $view->page = $this->_matchDict->get('page', 0);
+        $view->pageCount = floor($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
         $this->summary = RubinskyWeb_News::getNewsStories(
             $GLOBALS['news_feed'],
             $perpage,
-            ($this->page) * $perpage);
-        $this->summaryTitlesOnly = true;
-        $this->render();
+            ($view->page) * $perpage);
+        $view->summaryTitlesOnly = true;
+
+        $response->setBody($this->render('page'));
     }
 
     protected function _initializeApplication()
