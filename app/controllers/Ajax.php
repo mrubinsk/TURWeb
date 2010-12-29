@@ -17,7 +17,7 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
     {
         parent::_setup();
         $view = $this->getView();
-        $view->addTemplatePath(array($GLOBALS['fs_base'] . '/app/views/Home', $GLOBALS['fs_base'] . '/app/views/shared'));
+        $view->addTemplatePath(array($GLOBALS['fs_base'] . '/app/views/Ajax', $GLOBALS['fs_base'] . '/app/views/shared'));
     }
 
     public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response)
