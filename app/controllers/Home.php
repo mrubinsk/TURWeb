@@ -1,4 +1,13 @@
 <?php
+/**
+ * Main controller class
+ *
+ * Handles requests to the main home page.
+ *
+ * @copyright 2010 Michael J Rubinsky <mrubinsk@horde.org>
+ * @license  http://opensource.org/licenses/bsd-license.php BSD
+ * @author Michael J Rubinsky <mrubinsk@horde.org>
+ */
 class TUR_Home_Controller extends RubinskyWeb_Controller_Base
 {
     public function processRequest(Horde_Controller_Request $request, Horde_Controller_Response $response)
