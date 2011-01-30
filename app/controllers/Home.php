@@ -14,6 +14,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     {
         $this->_mapper = $GLOBALS['injector']->getInstance('Horde_Routes_Mapper');
         $this->_matchDict = new Horde_Support_Array($this->_mapper->match($request->getPath()));
+        $this->_setup();
         switch ($this->_matchDict->action) {
         case 'index':
             $this->_index($response);
@@ -40,7 +41,6 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
      */
     protected function _index(Horde_Controller_Response $response)
     {
-        $this->_setup();
         $view = $this->getView();
 
         if ($id = $this->_matchDict->id) {
@@ -49,31 +49,12 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
             $view->content = RubinskyWeb_News::getLatestNews($GLOBALS['news_feed'], $GLOBALS['max_stories']);
         }
 
-       /* Build the tag cloud */
-        $cloud = new Horde_Core_Ui_TagCloud();
-        $tags = $GLOBALS['injector']->getInstance('Horde_Registry')->news->listTagInfo(array(), array($GLOBALS['news_feed']));
-        foreach ($tags as $tag) {
-            $cloud->addElement(
-                $tag['tag_name'],
-                $this->urlWriter->urlFor('tag', array('tag' => $tag['tag_name'])),
-                $tag['total'] * 5);
-        }
-        $view->contentForCloud = $cloud->buildHTML();
+        /* Build tag cloud */
+        $this->_buildCloud($view);
 
         /* List of previous entries */
-        $view->summary = RubinskyWeb_News::getNewsStories(
-            $GLOBALS['news_feed'],
-            $GLOBALS['max_stories'],
-            $GLOBALS['max_stories']);
-
-        $view->summaryTitlesOnly = true;
-        
-        // Previously paging. Home page is page 0
-        // older articles increase page number
-        // This is a hack to avoid calculating the number of articles - which
-        // right now would mean downloading all available stories.
-        $view->pageCount = ceil($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
-        $view->page = $this->_matchDict->get('page', 1);
+        $this->_getPreviousEntries($view);
+        $this->_getPreviousPaging($view);
         
         /* RSS */
         $view->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $GLOBALS['news_feed'];
@@ -91,32 +72,52 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
      *  site_config
      *
      */
-    public function tag()
+    protected function _tag()
     {
-        $this->page_title = sprintf("Stories tagged with %s", $this->params->get('tag'));
-
-        $tag = $this->params->get('tag');
-        $recent = RubinskyWeb_News::getNewsStories($GLOBALS['news_feed'], 11, 0);
+        $view = $this->getView();
+        $tag = $this->_matchDict->tag;
+        $this->page_title = sprintf("Stories tagged with %s", $tag);
         $stories = RubinskyWeb_News::getNewsByTag($GLOBALS['news_feed'], $tag);
         if ($stories && count($stories)) {
-            $this->content = RubinskyWeb_News::getLatestNews(0, 5, $stories);
+            $view->content = RubinskyWeb_News::getLatestNews(0, 5, $stories);
         }
 
         /* List of previous entries */
-        $this->summary = RubinskyWeb_News::getNewsStories(
-                $GLOBALS['news_feed'],
-                5,
-                $GLOBALS['max_stories']);
+        $this->_getPreviousEntries($view);
+        $this->_getPreviousPaging($view);
+        $this->_buildCloud($view);
+        /* RSS */
+        $view->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $GLOBALS['news_feed'];
+        $layout = $this->getInjector()->getInstance('Horde_Core_Ui_Layout');
+        $layout->setView($view);
+        $layout->setLayoutName('main');
+        $response->setBody($layout->render('index'));
+    }
 
-        $this->summaryTitlesOnly = true;
-
+    protected function _getPreviousPaging(&$view)
+    {
         // Previously paging. Home page is page 0
         // older articles increase page number
         // This is a hack to avoid calculating the number of articles - which
         // right now would mean downloading all available stories.
-        $this->pageCount = ceil($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
-        $this->page = $this->params->get('page', 1);
-        $cloud = new Horde_UI_TagCloud();
+        $view->pageCount = ceil($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
+        $view->page = $this->_matchDict->get('page', 1);
+    }
+
+    protected function _getPreviousEntries(&$view)
+    {
+        $view->summary = RubinskyWeb_News::getNewsStories(
+            $GLOBALS['news_feed'],
+            $GLOBALS['max_stories'],
+            $GLOBALS['max_stories']);
+
+        $view->summaryTitlesOnly = true;
+    }
+
+    protected function _buildCloud(&$view)
+    {
+       /* Build the tag cloud */
+        $cloud = new Horde_Core_Ui_TagCloud();
         $tags = $GLOBALS['injector']->getInstance('Horde_Registry')->news->listTagInfo(array(), array($GLOBALS['news_feed']));
         foreach ($tags as $tag) {
             $cloud->addElement(
@@ -124,8 +125,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
                 $this->urlWriter->urlFor('tag', array('tag' => $tag['tag_name'])),
                 $tag['total'] * 5);
         }
-        $this->contentForCloud = $cloud->buildHTML();
-        $this->renderAction('index');
+        $view->contentForCloud = $cloud->buildHTML();
     }
 
     /**
