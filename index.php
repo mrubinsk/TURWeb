@@ -10,8 +10,6 @@ $runner = $injector->getInstance('Horde_Controller_Runner');
 $_root = ltrim(dirname($_SERVER['PHP_SELF']), '/');
 $mapper = $GLOBALS['injector']->getInstance('Horde_Routes_Mapper');
 $mapper->connect('home', $_root . '/', array('controller' => 'home'));
-$mapper->connect('about', $_root . '/about', array('controller' => 'content', 'content' => 'about'));
-$mapper->connect('software', $_root . '/software', array('controller' => 'content', 'content' => 'software'));
 $mapper->connect('news', $_root . '/:id', array('controller' => 'home'));
 $mapper->connect('tag', $_root . '/tag/:tag', array('controller' => 'home', 'action' => 'tag'));
 $mapper->connect('pager', $_root . '/gotopage/:page', array('controller' => 'ajax', 'action' => 'page'));
