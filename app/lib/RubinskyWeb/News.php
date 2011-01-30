@@ -47,7 +47,13 @@ class RubinskyWeb_News
      */
     public static function getNewsByTag($feed, $tag, $count = 20)
     {
-        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->searchTags(array($tag), $count, 0, array($feed), 0, true);
+        return $GLOBALS['injector']->getInstance('Horde_Registry')->news->searchTags(
+            array($tag),
+            array('max' => $count,
+                  'from' => 0,
+                  'channel_id' => array($feed),
+                  'order' => 0),
+            true);
     }
 
     /**
