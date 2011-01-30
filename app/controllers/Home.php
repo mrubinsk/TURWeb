@@ -78,7 +78,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     {
         $view = $this->getView();
         $tag = $this->_matchDict->tag;
-        $this->page_title = sprintf("Stories tagged with %s", $tag);
+        $view->page_title = sprintf("Stories tagged with %s", $tag);
         $stories = RubinskyWeb_News::getNewsByTag($GLOBALS['news_feed'], $tag);
         if ($stories && count($stories)) {
             $view->content = RubinskyWeb_News::getLatestNews(0, 5, $stories);
