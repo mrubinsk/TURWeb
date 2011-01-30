@@ -19,6 +19,8 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         case 'index':
             $this->_index($response);
             break;
+	case 'tag':
+            $this->_tag($response);
         }
     }
 
@@ -72,7 +74,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
      *  site_config
      *
      */
-    protected function _tag()
+    protected function _tag(Horde_Controller_Response $response)
     {
         $view = $this->getView();
         $tag = $this->_matchDict->tag;
