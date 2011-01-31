@@ -44,7 +44,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
     protected function _index(Horde_Controller_Response $response)
     {
         $view = $this->getView();
-
+        $view->page_title = 'theUpstairsRoom';
         if ($id = $this->_matchDict->id) {
             $view->content = RubinskyWeb_News::formatBlogEntry($GLOBALS['injector']->getInstance('Horde_Registry')->news->story($GLOBALS['news_feed'], $id, true));
         } else {
