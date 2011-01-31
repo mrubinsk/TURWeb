@@ -1,8 +1,34 @@
 <div id="twitter_div">
-<a href="http://twitter.com/mrubinsk" id="twitter-link" style="float:right;padding-top:4px;font-size:1.3em;font-style:italic;text-decoration:none;">Follow me</a>
-<h1>Twitter Updates</h1>
-<div class="clearer"></div>
-<ul id="twitter_update_list"></ul>
+<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 5,
+  interval: 5000,
+  width: 'auto',
+  height: 300,
+  theme: {
+    shell: {
+      background: '#aca492',
+      color: '#665544'
+    },
+    tweets: {
+      background: '#ccc3af',
+      color: '#665544',
+      links: '#ffffff'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: false,
+    behavior: 'all'
+  }
+}).render().setUser('mrubinsk').start();
+</script>
+</script>
 </div>
-<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/mrubinsk.json?callback=twitterCallback2&amp;count=5"></script>
