@@ -1,9 +1,9 @@
 <?php
 /**
  * Home Controller. Handles display of all content on home page.
- *  
+ *
  * @author mrubinsk
- */ 
+ */
 abstract class RubinskyWeb_Controller_Base extends Horde_Controller_Base
 {
     /**

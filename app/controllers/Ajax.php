@@ -43,7 +43,7 @@ class TUR_Ajax_Controller extends RubinskyWeb_Controller_Base
         $perpage = $GLOBALS['max_stories'];
 
         $view = $this->getView();
-        
+
         $view->page = $this->_matchDict->get('page', 0);
         $view->pageCount = floor($GLOBALS['injector']->getInstance('Horde_Registry')->news->storyCount($GLOBALS['news_feed'])/$GLOBALS['max_stories']);
         $view->summary = RubinskyWeb_News::getNewsStories(

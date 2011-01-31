@@ -46,7 +46,7 @@
 <body>
  <div class="maincontainer">
   <!-- Page Banner -->
-  <div class="header">
+  <div id="header" class="header">
   <!-- Fix me - this is sloppy HTML -->
   <a href="<?php echo $this->urlWriter->urlFor('home')?>">
    <div class="title">
