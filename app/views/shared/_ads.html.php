@@ -1,5 +1,5 @@
 <!--  Ads -->
-<div style="text-align:center;">
+<div style="text-align:center;" class="sidebar">
 <script type="text/javascript"><!--
 google_ad_client = "pub-6734301880291294";
 google_ad_width = 120;

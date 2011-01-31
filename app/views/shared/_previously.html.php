@@ -1,10 +1,9 @@
+<div id="previously" class="sidebar">
 <h1>Previously</h1>
-<div id="previously">
 <?php echo $this->renderPartial('news', array('locals' => array('page' => $this->page, 
                                                           'pageCount' => $this->pageCount,
                                                           'summary' => $this->summary)));
 ?>
-</div>
 <h1>Links</h1>
 <ul>
  <li>
@@ -16,3 +15,4 @@
   <div class="rfNewsBody">In the interests of adding a more personal touch, this is my family website, with personal news, photos, and other goodies!</div>
  </li>
 </ul>
+</div>

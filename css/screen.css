@@ -70,10 +70,10 @@ h1,h2,h3 {
 }
 
 /* title */
-.title {
+#header .title {
     padding: 38px;
 }
-.title h1 {
+#header .title h1 {
     color: #E4DBCF;
     font: normal 3.4em "Lucida Sans Unicode","Trebuchet MS",sans-serif;
 }
@@ -110,7 +110,7 @@ h1,h2,h3 {
     float: right;
     width: 218px;
 }
-.sidenav h1 {
+.sidebar h1 {
     background: #BCB39F url(../img/sidenavh1.gif) repeat-x;
     border-bottom: 1px solid #999;
     border-top: 1px solid #CCC;
@@ -120,16 +120,16 @@ h1,h2,h3 {
     margin: 0;
     padding-left: 2px;
 }
-.sidenav ul {
+.sidebar ul {
     margin: 0;
     padding: 0;
 }
-.sidenav li {
+.sidebar li {
     /*border-bottom: 1px solid #A98;
     border-top: 1px solid #DDC;*/
     list-style: none;
 }
-.sidenav li a {
+.sidebar li a {
     background: #CCC3AF;
     color: #554;
     font-weight: bold;
@@ -137,7 +137,7 @@ h1,h2,h3 {
     padding: 2px 4px 8px 4px;
     text-decoration: none;
 }
-.sidenav li a:hover {
+.sidebar li a:hover {
     background: #D6CCB9;
     color: #654;
 }

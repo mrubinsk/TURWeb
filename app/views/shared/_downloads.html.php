@@ -1,4 +1,6 @@
+<div class="sidebar">
 <h1>Downloads</h1>
+</div>
 <div id="github-badge"></div>
 <script type="text/javascript" charset="utf-8">
   GITHUB_USERNAME = "mrubinsk";
@@ -9,5 +11,3 @@
   GITHUB_SHOW_ALL = "Show all"
 </script>
 <script src="http://drnicjavascript.rubyforge.org/github_badge/dist/github-badge-launcher.js" type="text/javascript"></script>
-
-</ul>
