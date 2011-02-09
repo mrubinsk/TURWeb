@@ -20,5 +20,5 @@ $site_name = 'theUpstairsRoom';
 $news_feed_id = 124;
 $max_stories = 4;
 
-$news_share_url = 'http://portal.theupstairsroom.com/horde/jonah/stories/share.php';
-$feed_base = 'http://portal.theupstairsroom.com/horde/jonah/delivery/rss.php';
+$news_share_url = 'http://h4.theupstairsroom.com/horde/jonah/stories/share.php';
+$feed_base = 'http://theupstairsroom.com/rss.php';

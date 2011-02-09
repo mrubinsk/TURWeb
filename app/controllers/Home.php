@@ -59,7 +59,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         $this->_getPreviousPaging($view);
 
         /* RSS */
-        $view->feedurl = $GLOBALS['feed_base'] . '?channel_id=' . $GLOBALS['news_feed'];
+        $view->feedurl = $GLOBALS['feed_base'];
         $layout = $this->getInjector()->getInstance('Horde_Core_Ui_Layout');
         $layout->setView($view);
         $layout->setLayoutName('main');
