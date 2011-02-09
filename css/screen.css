@@ -22,12 +22,13 @@ a:hover {
 body {
     background: #655A46 url(../img/bg.gif);
     color: #543;
-    font: normal 62.5% "Lucida Sans Unicode",sans-serif;
+    font-size: 12px;
+    font-family: "Helvetica Neue",helvetica,arial,sans-serif
 }
-input {
+/*input {
     color: #555;
-    font: normal 1.1em "Lucida Sans Unicode",sans-serif;
-}
+    font: normal 100% "Helvetica Neue",helvetica,arial,sans-serif;
+}*/
 p,cite,code,ul {
     font-size: 1.2em;
     padding-bottom: 1.2em;
@@ -125,21 +126,20 @@ h1,h2,h3 {
     padding: 0;
 }
 .sidebar li {
-    /*border-bottom: 1px solid #A98;
-    border-top: 1px solid #DDC;*/
+    border-bottom: 1px dotted #dddddd;
+   /* border-top: 1px solid #DDC;*/
     list-style: none;
 }
 .sidebar li a {
     background: #CCC3AF;
-    color: #554;
-    font-weight: bold;
+    color: #996633;
     display: block;
     padding: 2px 4px 8px 4px;
     text-decoration: none;
 }
 .sidebar li a:hover {
     background: #D6CCB9;
-    color: #654;
+    color: #C60;
 }
 
 /* content */
@@ -211,7 +211,7 @@ h1,h2,h3 {
     text-decoration: none;
 }
 .rfNewsHeader {
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .rfNewsBody {

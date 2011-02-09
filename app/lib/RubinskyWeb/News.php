@@ -15,7 +15,7 @@ class RubinskyWeb_News
         if (count($stories) === 0) {
             $stories = self::getNewsStories($feed, $count, 0);
         }
-//var_dump($stories);
+
         $html = '';
         if (is_array($stories)) {
             foreach ($stories as $story) {
