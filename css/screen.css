@@ -29,7 +29,7 @@ body {
     color: #555;
     font: normal 100% "Helvetica Neue",helvetica,arial,sans-serif;
 }*/
-p,cite,code,ul {
+p, cite, code, ul {
     font-size: 1.2em;
     padding-bottom: 1.2em;
 }
@@ -38,14 +38,7 @@ h1 {
     margin-bottom: 4px;
 }
 
-/*blockquote {
-    background: url(../img/quote.gif) no-repeat;
-    color: #666;
-    display: block;
-    font: normal 1.3em "Lucida Sans Unicode",serif;
-    padding-left: 28px;
-}*/
-h1,h2,h3 {
+h1, h2, h3 {
     color: #654;
     padding-top: 6px;
 }
@@ -65,20 +58,24 @@ h1,h2,h3 {
 /* header */
 #header.header {
     background: url(../img/header.jpg);
-    height: 120px;
+    height: 210px;
     margin: 0 auto;
     width: 760px;
 }
 
 /* title */
 #header .title {
-    padding: 38px;
+    padding: 28px;
 }
 #header .title h1 {
     color: #E4DBCF;
-    font: normal 3.4em "Lucida Sans Unicode","Trebuchet MS",sans-serif;
+    font: bold 3.8em "Lucida Sans Unicode","Trebuchet MS",sans-serif;
 }
-
+#header .title h2 {
+    color: #E4DBCF;
+    font: normal "Lucida Sans Unicode","Trebuchet MS",sans-serif;
+    padding-left: 15px;
+}
 /* navigation */
 .navigation {
     background: #FFF url(../img/bgnavigation.gif) repeat-x;

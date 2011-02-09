@@ -46,14 +46,7 @@
 <body>
  <div class="maincontainer">
   <!-- Page Banner -->
-  <div id="header" class="header">
-  <!-- Fix me - this is sloppy HTML -->
-  <a href="<?php echo $this->urlWriter->urlFor('home')?>">
-   <div class="title">
-     <h1>theUpstairsRoom</h1>
-   </div>
-  </a>
-  </div>
+<?php echo $this->renderPartial('banner');?>
 <?php echo $this->renderPartial('nav');?>
     <div class="main">
      <!--  Main content area -->
