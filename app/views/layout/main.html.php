@@ -69,7 +69,7 @@
       <?php echo $this->renderPartial('previously', array('locals' => array('page' => $this->page,
                                                           'pageCount' => $this->pageCount,
                                                           'summary' => $this->summary)));?>
-      <?php echo $this->renderPartial('ads'); ?>
+      <?php //echo $this->renderPartial('ads'); ?>
      </div>
      <div class="clearer"></div>
    </div>
