@@ -47,7 +47,6 @@
  <div class="maincontainer">
   <!-- Page Banner -->
 <?php echo $this->renderPartial('banner');?>
-<?php echo $this->renderPartial('nav');?>
     <div class="main">
      <!--  Main content area -->
      <?php echo $this->contentTag('div', $this->contentForLayout, array('class' => 'content'));?>
@@ -57,12 +56,13 @@
      <div class="sidenav">
       <?php echo $this->renderPartial('poweredby'); ?>
       <?php echo $this->renderPartial('twitter');?>
-      <?php //echo $this->renderPartial('downloads'); ?>
       <?php echo $this->renderPartial('cloud'); ?>
-      <?php echo $this->renderPartial('previously', array('locals' => array('page' => $this->page,
-                                                          'pageCount' => $this->pageCount,
-                                                          'summary' => $this->summary)));?>
-      <?php //echo $this->renderPartial('ads'); ?>
+      <?php echo $this->renderPartial(
+        'previously',
+        array(
+          'locals' => array('page' => $this->page,
+          'pageCount' => $this->pageCount,
+          'summary' => $this->summary)));?>
      </div>
      <div class="clearer"></div>
    </div>
