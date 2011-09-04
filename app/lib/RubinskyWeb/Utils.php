@@ -11,7 +11,7 @@ class RubinskyWeb_Utils
      *
      * @return string  An HTML representation of the bread crumb trail
      */
-    function getCrumbs($base_url, $trail)
+    static public function getCrumbs($base_url, $trail)
     {
         $html = '';
         $haveFirst = false;
@@ -30,7 +30,7 @@ class RubinskyWeb_Utils
         return $html;
     }
 
-    function getHordeBlock($app, $block_name, $params)
+    static public function getHordeBlock($app, $block_name, $params)
     {
         return $$GLOBALS['injector']->getInstance('Horde_Registry')->horde->blockContent($app, $block_name, $params);
     }
