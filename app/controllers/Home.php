@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Main controller class
  *
@@ -19,7 +19,7 @@ class TUR_Home_Controller extends RubinskyWeb_Controller_Base
         case 'index':
             $this->_index($response);
             break;
-	case 'tag':
+	    case 'tag':
             $this->_tag($response);
         }
     }
