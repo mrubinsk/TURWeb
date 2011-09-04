@@ -193,10 +193,10 @@ h1, h2, h3 {
 }
 
 .article {
-    margin-bottom: 25px;
+    margin-top: 25px;
 }
 .storyBody {
-    margin-left: 80px;
+    /* margin-left: 80px;*/
 }
 .articleLink {
     font-style:italic;
