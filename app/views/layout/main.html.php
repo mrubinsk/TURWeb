@@ -63,6 +63,7 @@
           'locals' => array('page' => $this->page,
           'pageCount' => $this->pageCount,
           'summary' => $this->summary)));?>
+      <?php echo $this->renderPartial('wishlist'); ?>
      </div>
      <div class="clearer"></div>
    </div>
